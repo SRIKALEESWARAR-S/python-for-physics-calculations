@@ -37,7 +37,7 @@ try:
           v = float(input("enter the voltage:"))
           print("the current value in amps:",v/r)
 
-     def e_power():
+    def e_power():
         select_option = int(input('''if you have V press 1
                                      if you have R press 2
                                      I is mandatory'''))
@@ -52,7 +52,7 @@ try:
             elif select_option == 2:
                r = float(input("enter the resistence in ohms:"))
                print("power is",(i**2)*r )
-     def speed():
+    def speed():
           distance = float(input("enter distance in meteres:"))
           time = float(input("enter time in seconds:"))
           if time <=0:
@@ -61,7 +61,7 @@ try:
              print("speed in m/s:",distance/time)
       
 
-     def accelaration():
+    def accelaration():
          f_v = float(input("enter the final velocity:"))
          i_v = float(input("enter the initial velocity:"))
          time = float(input("enter time in seconds:"))
@@ -69,33 +69,33 @@ try:
             print("I think thats pratically not possible")
          else:
             print("accelaration is:",(f_v-i_v)/time)
-     def ke():
+    def ke():
          mass = float(input("enter mass:"))
          velocity = float(input("enter velocity:"))
-         if mass <= 0 or velocity <=0:
+         if mass <= 0 or vphysics_formulas_calculation.pyelocity <=0:
             print("I think its against physics")
          else:
             print("kinetic energy:",0.5*mass*(velocity**2) )
-     def depth():
+    def depth():
           time = float(input("enter time in seconds:"))
           if time <= 0:
              print("youre not throwing the rock")
           else:
              print("depth in meters:",time*9.8 )
-     def mass_e():
+    def mass_e():
           weight = float(input("enter your weight in kg:"))
           if weight <= 0 :
              print("ha ha nice joke, even light has some mass")
           else:
              print("your real mass is:",weight/9.8)
-     def force():
+    def force():
           mass = float(input("enter mass:"))
-          accelarqation = float(input("enter accelaration:"))
+          accelaration = float(input("enter accelaration:"))
           if mass <= 0 or accelaration <= 0:
              print(" I think theres some problem")
           else:
              print("force",mass*accelaration)
-     def main(option):
+    def main(option):
           
           if option == 1:
              ohm_law()
@@ -114,8 +114,8 @@ try:
           elif option == 8:
              force()
           print("நன்றி வணக்கம்! படைப்பு ஸ்ரீ காளீஸ்வரர் ")
-     selection = select_option()
-     main(selection)
+    selection = select_option()
+    main(selection)
 except ValueError as ve:
       print("value error",ve)
 
@@ -123,5 +123,4 @@ except ValueError as ve:
                
 
      
-
 
