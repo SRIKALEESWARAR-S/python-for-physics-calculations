@@ -4,7 +4,7 @@ try:
    def choice():
     while True:
      try:
-      print('''in this code if you enter a value it'll show a
+       print('''in this code if you enter a value it'll show a
               similar real world think on that sscale range
               For Nano scale region press 1
               For micron scale region press 2
@@ -25,7 +25,7 @@ try:
        if choice in range (1,10):
          print(f"you had selected {choice} option")
          return choice
-      except ValueError:
+     python3 world_of_scale_1.pyexcept ValueError:
          print("value error")
    def nano():
       print("welcome to the Nano world")
