@@ -1,0 +1,69 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("Welcome to the new code to check if the velocity is constant.")
+
+def inputs():
+    print("You will need to enter the values of distance and time.")
+
+    while True:
+        try:
+            value_count = int(input("How many values do you have right now? "))
+            if value_count <= 0:
+                print("You have no values! Try again.")
+                continue
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+            continue
+
+        distance_values = []
+        time_values = []
+
+        for i in range(value_count):
+            try:
+                dis = float(input(f"Enter distance value {i+1}: "))
+                tim = float(input(f"Enter time value {i+1}: "))
+                distance_values.append(dis)
+                time_values.append(tim)
+            except ValueError:
+                print("Invalid input. Please enter numerical values.")
+                return None, None
+
+        return distance_values, time_values
+
+def calculate_velocity(distances, times):
+    velocities = []
+    for d, t in zip(distances, times):
+        if t != 0:
+            velocities.append(d / t)
+        else:
+            velocities.append(float('inf'))  # or handle zero division differently
+    return velocities
+
+def plot_graph(times, distances, velocities):
+    plt.figure(figsize=(12, 5))
+
+    # Distance vs Time
+    plt.subplot(1, 2, 1)
+    plt.plot(times, distances, marker='o')
+    plt.title("Distance vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Distance (m)")
+
+    # Velocity vs Time
+    plt.subplot(1, 2, 2)
+    plt.plot(times, velocities, marker='o', color='green')
+    plt.title("Velocity vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Velocity (m/s)")
+
+    plt.tight_layout()
+    plt.show()
+
+# Main execution
+distances, times = inputs()
+if distances and times:
+    velocities = calculate_velocity(distances, times)
+    print("Calculated Velocities:", velocities)
+    plot_graph(times, distances, velocities)
+
