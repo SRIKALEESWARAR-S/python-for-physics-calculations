@@ -22,4 +22,21 @@ class graph():
                 continue
              break
           except ValueError as ve:
+               print("i think there's a value error")
+               continue
+          return x,y 
+     def plot():
+           x = xaxis
+           y =yaxis
+           xname = input("enter the name of X-axis")
+           yname = input("enter the name of y-axis")
+           title = input("enter the title of the graph")
+           mlt.plot(xaxis,yaxis)
+           mlt.title(title)
+           mlt.xlabel(xname)
+           mlt.ylabel(yname)
+           mlt.show()
+
+plotting = graph()
+
 
