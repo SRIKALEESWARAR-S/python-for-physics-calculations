@@ -20,7 +20,7 @@ def force(m,a):
 
 #stream lit
 
-st.set_page_config(page_title = "Force",lay_out = "centred")
+st.set_page_config(page_title = "Force",lay_out = "centered")
 
 st.title("Force calculator")
 st.write("formula is f = ma")
