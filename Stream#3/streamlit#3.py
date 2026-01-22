@@ -46,7 +46,7 @@ st.set_page_config(
 )
 
 st.title("Momentum Calculator")
-st.write("### Formula:  **F = m × a**")
+st.write("### Formula:  **p = m × v**")
 st.write("Made by Sri kaleeswarar S using Python")
 
 mode = st.radio(
