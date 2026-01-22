@@ -21,7 +21,7 @@ def force_momentum(p, t):
     if p_arr.shape != t_arr.shape:
         raise ValueError("momentum and time must have same length")
 
-    if np.any(p_arr <= 0) or np.any(t_arr <= 360):
+    if np.any(p_arr <= 0) or np.any(t_arr <= 0):
         raise ValueError("both should be greater than 0")
 
    
