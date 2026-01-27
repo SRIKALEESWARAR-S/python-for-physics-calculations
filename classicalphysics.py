@@ -100,7 +100,7 @@ def final_velocity(s,u,a):
     """
     
     """
-    if isinstance(s,(int,float)) and isinstance(u,(int,float)) and isinstance(a,(int,,float)):
+    if isinstance(s,(int,float)) and isinstance(u,(int,float)) and isinstance(a,(int,float)):
         if s <= 0 or u <= 0 or a <=0:
             raise ValueError("The values can not be less than or equal to zero")
         v = u**2 + 2*a*s
