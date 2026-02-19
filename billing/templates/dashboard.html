@@ -1,0 +1,30 @@
+<html>
+<body>
+<h2>Welcome {{ user }}</h2>
+
+<h3>Add Customer</h3>
+<form method="post" action="/add_customer">
+    <input type="hidden" name="user" value="{{ user }}">
+    Name: <input type="text" name="name">
+    <button type="submit">Add</button>
+</form>
+
+<h3>Add Transaction</h3>
+<form method="post" action="/add_transaction">
+    <input type="hidden" name="user" value="{{ user }}">
+    Customer ID: <input type="number" name="customer_id"><br>
+    Description: <input type="text" name="description"><br>
+    Credit: <input type="number" step="0.01" name="credit"><br>
+    Debit: <input type="number" step="0.01" name="debit"><br>
+    <button type="submit">Add</button>
+</form>
+
+<h3>Recent Logs</h3>
+<ul>
+{% for log in logs %}
+<li>{{ log.timestamp }} | {{ log.username }} | {{ log.action }} | {{ log.details }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
