@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from numba import njit
 from pint import UnitRegistry
-from sklearn.linear_model import` LinearRegression`
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 # 1. Setup Unit Registry (Global)
