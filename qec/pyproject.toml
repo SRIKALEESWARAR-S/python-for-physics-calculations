@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qec-rmt-studio"
+version = "0.1.0"
+description = "Interactive desktop application for quantum error correction and random matrix theory analysis of environmental sensor data"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Principal Research Software Engineer", email = "research@example.com"}
+]
+keywords = ["quantum", "error-correction", "random-matrix-theory", "surface-code", "gui"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+dependencies = [
+    "numpy>=1.19.0",
+    "scipy>=1.5.0",
+    "pandas>=1.1.0",
+    "matplotlib>=3.3.0",
+    "PyQt6>=6.3.0",
+    "pyqtgraph>=0.13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+    "isort>=5.0.0",
+]
+stim = [
+    "stim>=1.7.0",
+    "pymatching>=0.2.0",
+]
+
+[project.scripts]
+qec-rmt-studio = "qec_rmt.gui.app:main"
+
+[tool.setuptools]
+packages = ["qec_rmt", "qec_rmt.core", "qec_rmt.gui"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=qec_rmt --cov-report=html --cov-report=term-missing"
