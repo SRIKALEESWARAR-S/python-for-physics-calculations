@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sris-office"
+version = "0.1.0"
+description = "A lightweight, open-source Linux office suite beginning with Sri's Writer."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = ["PySide6>=6.5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+sris-writer = "sris_writer.app:main"
+
+[tool.setuptools.packages.find]
+include = ["sris_writer*"]

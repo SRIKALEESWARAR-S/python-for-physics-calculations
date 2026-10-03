@@ -1,0 +1,10 @@
+/* Colours come from the palette so one stylesheet serves light and dark. */
+RibbonGroup { border-right: 1px solid palette(mid); }
+RibbonGroup QLabel#groupTitle { color: palette(placeholder-text); font-size: 8pt; }
+QTabWidget#ribbon::pane { border-top: 1px solid palette(mid); }
+QTabBar::tab { padding: 5px 16px; }
+QTabBar::tab:selected { font-weight: bold; border-bottom: 2px solid palette(highlight); }
+QToolButton { padding: 3px 6px; border: 1px solid transparent; border-radius: 3px; }
+QToolButton:hover { border-color: palette(mid); background: palette(button); }
+QToolButton:checked { background: palette(highlight); color: palette(highlighted-text); }
+QToolButton:focus, QComboBox:focus, QLineEdit:focus, QPushButton:focus { border: 1px solid palette(highlight); }
