@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Auger Electron Spectroscopy Laboratory</title>
+<style>
+:root{
+  --bg:#050812;--panel:#0a1020;--panel2:#0c1427;--line:#17243b;
+  --cyan:#19d9f2;--teal:#19c9bd;--blue:#4e8cff;--text:#dce8f5;--muted:#7890aa;
+  --amber:#ffb21c;--danger:#ff4e72;--green:#39df9b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% -10%,#10243c 0,#050812 45%);color:var(--text);
+font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.app{max-width:1180px;margin:auto;padding:18px}
+header{background:linear-gradient(135deg,#071424,#091021);border:1px solid #17314b;border-radius:16px;padding:18px;
+box-shadow:0 15px 50px #0008}
+.brand{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.title{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border:1px solid #1b758c;border-radius:12px;
+display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 25px #12dff333;font-size:22px}
+h1{font-size:20px;margin:0;letter-spacing:.5px}.subtitle{font-size:11px;color:#7890aa;margin-top:4px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.badge{font-size:10px;border:1px solid #20354d;
+background:#091625;padding:8px 11px;border-radius:8px;color:#9db1c7}.badge b{color:var(--cyan)}
+nav{display:flex;gap:7px;margin-top:17px;overflow:auto;padding-bottom:2px}
+nav button{white-space:nowrap;border:1px solid #182940;background:#091120;color:#8095ac;border-radius:9px;padding:9px 13px;
+font-size:11px;cursor:pointer}nav button.active,nav button:hover{color:#c9faff;border-color:#117a91;background:#083143;box-shadow:0 0 18px #12dff21c}
+main{margin-top:14px}.tab{display:none}.tab.active{display:block}
+.card{background:linear-gradient(145deg,#09111f,#080e1b);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:13px;
+box-shadow:0 8px 30px #0004}.cardtitle{font-size:11px;letter-spacing:.5px;color:#a8bfd6;margin-bottom:12px;text-transform:uppercase}
+.grid2{display:grid;grid-template-columns:1.35fr .85fr;gap:13px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr}.brand{align-items:flex-start;flex-direction:column}.badges{justify-content:flex-start}}
+.atomBox{height:380px;border:1px solid #152239;border-radius:12px;background:#030711;position:relative;overflow:hidden}
+.atom{position:absolute;left:50%;top:50%;width:270px;height:270px;transform:translate(-50%,-50%)}
+.shell{position:absolute;border:1px solid #263449;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);
+box-shadow:0 0 15px #0e2534}.s1{width:100px;height:100px}.s2{width:175px;height:175px}.s3{width:250px;height:250px}
+.nucleus{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;
+background:#15e4e9;box-shadow:0 0 22px #15e4e988}
+.electron{position:absolute;width:7px;height:7px;background:#14e4f1;border-radius:50%;box-shadow:0 0 9px #14e4f1}
+.e1{left:83px;top:132px}.e2{left:184px;top:100px}.e3{left:130px;top:43px}.e4{left:229px;top:150px}
+.vacancy{position:absolute;width:10px;height:10px;border:2px solid var(--danger);border-radius:50%;left:137px;top:126px;box-shadow:0 0 10px #ff4e7266}
+.beam{position:absolute;left:-70px;top:178px;width:180px;height:2px;background:linear-gradient(90deg,transparent,var(--amber));
+box-shadow:0 0 10px var(--amber);opacity:0}.beam:after{content:"";position:absolute;right:0;top:-4px;border:5px solid transparent;border-right:0;border-left:9px solid var(--amber)}
+.augere{position:absolute;width:150px;height:2px;background:linear-gradient(90deg,#ff4e72,transparent);left:135px;top:130px;transform:rotate(-32deg);transform-origin:left;opacity:0}
+.sim.running .beam{animation:beam 1.8s ease forwards}.sim.step2 .e3{animation:drop 1.3s ease forwards}.sim.step3 .augere{animation:eject 1.2s ease forwards}
+@keyframes beam{0%{left:-100px;opacity:0}15%{opacity:1}100%{left:85px;opacity:1}}
+@keyframes drop{to{transform:translate(-28px,32px);opacity:.3}}
+@keyframes eject{0%{opacity:1;transform:rotate(-32deg) scaleX(.1)}100%{opacity:1;transform:rotate(-32deg) scaleX(1.1)}}
+.controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.btn{border:1px solid #1b344c;background:#0a1827;color:#aac1d4;border-radius:8px;padding:8px 11px;
+font-size:11px;cursor:pointer}.btn.primary{background:#063d52;border-color:#078ba7;color:#b9faff}.btn:hover{filter:brightness(1.25)}
+.stepbar{display:flex;gap:6px;margin-top:9px}.stepbar .btn{flex:1}.stepbar .btn.on{border-color:#1a9eb4;color:#c9ffff;background:#0a3544}
+.preset{border:1px solid #18283d;background:#0a1120;border-radius:10px;padding:12px;cursor:pointer}.preset.sel{border-color:#0d8ca6;background:#082b3b}
+.preset b{display:block;font-size:11px}.preset span{color:#6e849b;font-size:10px}
+.data{margin-top:12px;border-top:1px solid #162338;padding-top:10px}.row{display:flex;justify-content:space-between;padding:6px 0;font:11px ui-monospace,SFMono-Regular,monospace}
+.row span:last-child{color:#39df9b}.formula{background:#030813;border:1px solid #101c2c;border-radius:7px;padding:12px;text-align:center;color:#46dce9;font-family:monospace;margin-top:8px}
+.result{font-size:22px;color:#4cecff;text-align:right;font-family:monospace;text-shadow:0 0 15px #15dbe988}
+.info{font-size:11px;line-height:1.6;color:#8298ae}.info strong{color:#c4d8ea}
+canvas{width:100%;height:280px;background:#030711;border:1px solid #152239;border-radius:10px;display:block}
+label{font-size:10px;color:#8298ae;display:block;margin:10px 0 5px}input[type=range]{width:100%;accent-color:#16d9e9}
+.selects{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.field{background:#07101d;border:1px solid #17253a;border-radius:9px;padding:10px}
+.value{font-family:monospace;color:#52e9ee;font-size:12px}
+.footer{text-align:center;color:#587087;font-size:10px;padding:20px}
+.status{display:inline-flex;gap:6px;align-items:center}.dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green)}
+table{width:100%;border-collapse:collapse;font-size:11px}th,td{padding:9px;border-bottom:1px solid #17253a;text-align:left}th{color:#8097ad}
+.layer{height:55px;margin:6px 0;border:1px solid #1b2b40;border-radius:7px;background:linear-gradient(90deg,#10243a,#081321);display:flex;align-items:center;padding:0 12px;position:relative;overflow:hidden}
+.ion{position:absolute;left:-25px;color:#ffb21c;font-size:14px;animation:ion 2s linear infinite}.ion:nth-child(2){animation-delay:.7s}.ion:nth-child(3){animation-delay:1.3s}
+@keyframes ion{to{left:105%}}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="title"><div class="logo">⚛</div><div><h1>Auger Electron Spectroscopy (AES) Laboratory</h1><div class="subtitle">Core Physics, CMA Ray Optics, Spectrum Workbench &amp; Depth Profiling</div></div></div>
+    <div class="badges">
+      <div class="badge">UHV <b>1.5 × 10⁻⁹ Pa</b></div>
+      <div class="badge">Primary Beam <b>3.0 keV</b></div>
+      <div class="badge"><span class="status"><i class="dot"></i> ONLINE</span></div>
+    </div>
+  </div>
+  <nav id="nav">
+    <button class="active" data-tab="physics">⚛ 1. Atomic Auger Physics</button>
+    <button data-tab="cma">◉ 2. Instrument &amp; CMA Optics</button>
+    <button data-tab="spectrum">⌁ 3. Spectrum Workbench</button>
+    <button data-tab="depth">◈ 4. Ar⁺ Depth Profiling</button>
+    <button data-tab="curve">〽 5. Universal Curve</button>
+  </nav>
+</header>
+
+<main>
+<section class="tab active" id="physics">
+  <div class="card">
+    <div class="cardtitle">⚙ 3-Step Non-Radiative Auger Transition Simulation</div>
+    <div class="grid2">
+      <div>
+        <div class="atomBox sim" id="sim">
+          <div class="beam"></div><div class="augere"></div>
+          <div class="atom"><div class="shell s3"></div><div class="shell s2"></div><div class="shell s1"></div>
+            <div class="nucleus"></div><div class="electron e1"></div><div class="electron e2"></div><div class="electron e3"></div><div class="electron e4"></div><div class="vacancy"></div>
+          </div>
+        </div>
+        <div class="controls"><button class="btn primary" id="play">▶ Play All</button><button class="btn" id="reset">↶ Reset</button></div>
+        <div class="stepbar"><button class="btn" data-step="1">Step 1: Ionization</button><button class="btn" data-step="2">Step 2: Relaxation</button><button class="btn" data-step="3">Step 3: Auger Ejection</button></div>
+      </div>
+      <div>
+        <div class="cardtitle">Quantum Transition Presets</div>
+        <div class="grid3">
+          <div class="preset sel" data-mode="KLL"><b>KLL Mode</b><span>S¹ (1619 eV)</span></div>
+          <div class="preset" data-mode="LMM"><b>LMM Mode</b><span>Cu (920 eV)</span></div>
+          <div class="preset" data-mode="MNN"><b>MNN Mode</b><span>Ag (356 eV)</span></div>
+        </div>
+        <div class="data" id="data"></div>
+        <div class="formula">E<sub>kin</sub> = E<sub>X</sub> − E<sub>Y</sub> − E<sub>Z</sub> − Φ</div>
+        <p class="info">Crucial note: <strong>E<sub>kin</sub> is independent of primary beam energy</strong> once the core vacancy is created. It depends on atomic energy levels, which makes AES highly useful for chemical identification.</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid3">
+    <div class="card"><div class="cardtitle">Step 1: Primary Ionization</div><p class="info">A high-energy incident electron strikes a tightly bound core electron, ejecting it and creating a core vacancy.</p></div>
+    <div class="card"><div class="cardtitle">Step 2: Relaxation</div><p class="info">An electron from a higher shell falls into the vacancy. The released energy is transferred to another electron.</p></div>
+    <div class="card"><div class="cardtitle">Step 3: Auger Electron Emission</div><p class="info">The transferred energy ejects a second electron. Its kinetic energy carries information about the element and chemical environment.</p></div>
+  </div>
+</section>
+
+<section class="tab" id="cma">
+  <div class="card"><div class="cardtitle">Instrument &amp; Cylindrical Mirror Analyzer (CMA)</div>
+    <div class="grid2">
+      <div>
+        <canvas id="cmaCanvas" height="350"></canvas>
+        <div class="controls"><button class="btn primary" id="cmaRun">▶ Run Trajectory</button><button class="btn" id="cmaReset">↶ Reset</button></div>
+      </div>
+      <div>
+        <div class="field"><label>Retarding Voltage</label><input id="rv" type="range" min="0" max="100" value="35"><div class="value" id="rvv">35 V</div></div>
+        <div class="field"><label>Pass Energy</label><input id="pe" type="range" min="50" max="2000" value="500"><div class="value" id="pev">500 eV</div></div>
+        <div class="field"><label>Primary Beam</label><input id="pb" type="range" min="500" max="10000" value="3000"><div class="value" id="pbv">3000 eV</div></div>
+        <p class="info">The CMA accepts electrons over a selected energy range and focuses suitable trajectories toward a detector. This simulation is conceptual and intended to visualize analyzer operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="spectrum">
+  <div class="card"><div class="cardtitle">Spectrum Workbench</div>
+    <div class="grid2">
+      <div><canvas id="specCanvas" height="350"></canvas>
+        <div class="controls"><button class="btn primary" id="regen">↻ Regenerate Spectrum</button><button class="btn" id="noise">Noise: Medium</button></div>
+      </div>
+      <div>
+        <div class="cardtitle">Elements / Transitions</div>
+        <div class="grid3" id="elements"></div>
+        <div class="data" id="peakInfo"><div class="info">Click a spectrum peak or element to inspect its approximate AES transition.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="depth">
+  <div class="card"><div class="cardtitle">Ar⁺ Sputter Depth Profiling</div>
+    <div class="grid2">
+      <div>
+        <div class="layer"><span class="ion">Ar⁺ ↓</span><span>Contamination / C-O rich surface</span></div>
+        <div class="layer"><span class="ion">Ar⁺ ↓</span><span>Functional layer</span></div>
+        <div class="layer"><span class="ion">Ar⁺ ↓</span><span>Substrate</span></div>
+        <div class="field"><label>Sputter Time</label><input id="stime" type="range" min="0" max="120" value="40"><div class="value" id="stimev">40 s</div></div>
+        <div class="field"><label>Ion Energy</label><input id="ienergy" type="range" min="500" max="5000" value="2000"><div class="value" id="ienergyv">2000 eV</div></div>
+      </div>
+      <div><canvas id="depthCanvas" height="350"></canvas><p class="info">The displayed depth profile is a synthetic demonstration. Real sputter rates depend strongly on material, ion species, geometry, incidence angle and ion energy.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="tab" id="curve">
+  <div class="card"><div class="cardtitle">Universal Curve — Electron Inelastic Mean Free Path</div>
+    <div class="grid2"><div><canvas id="curveCanvas" height="350"></canvas></div>
+      <div class="field"><label>Electron Kinetic Energy</label><input id="energy" type="range" min="20" max="3000" value="1200"><div class="result" id="energyv">1200 eV</div>
+      <div class="data"><div class="row"><span>Estimated IMFP</span><span id="imfp">0.73 nm</span></div><div class="row"><span>Surface sensitivity</span><span>High</span></div></div>
+      <p class="info">Electrons generated deeper inside a solid are more likely to lose energy before escaping. AES therefore emphasizes the near-surface region, typically a few nanometres.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+<div class="footer">Auger Electron Spectroscopy (AES) Laboratory • Virtual Physics Engine • Interactive Demonstration</div>
+</div>
+
+<script>
+const modes={
+ KLL:{x:1839,y:149,z:99,phi:4.5,label:"S KLL",energy:1586.5},
+ LMM:{x:932,y:75,z:32,phi:4.5,label:"Cu LMM",energy:820.5},
+ MNN:{x:368,y:8,z:3,phi:4.5,label:"Ag MNN",energy:352.5}
+};
+const dataEl=document.getElementById('data');
+function showMode(m){
+ const d=modes[m], kin=d.x-d.y-d.z-d.phi;
+ dataEl.innerHTML=`<div class="row"><span>Primary Vacancy Binding Energy (E<sub>X</sub>)</span><span>${d.x.toFixed(1)} eV</span></div>
+ <div class="row"><span>Filling Electron Binding Energy (E<sub>Y</sub>)</span><span>${d.y.toFixed(1)} eV</span></div>
+ <div class="row"><span>Auger Electron Binding Energy (E<sub>Z</sub>)</span><span>${d.z.toFixed(1)} eV</span></div>
+ <div class="row"><span>Spectrometer Work Function (Φ)</span><span>${d.phi.toFixed(1)} eV</span></div>
+ <div class="row"><span>Auger Kinetic Energy (E<sub>kin</sub>)</span><span class="result">${kin.toFixed(1)} eV</span></div>`;
+}
+showMode('KLL');
+document.querySelectorAll('.preset').forEach(p=>p.onclick=()=>{document.querySelectorAll('.preset').forEach(x=>x.classList.remove('sel'));p.classList.add('sel');showMode(p.dataset.mode)});
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active');drawAll()});
+const sim=document.getElementById('sim');
+document.getElementById('play').onclick=()=>{sim.className='atomBox sim running';setTimeout(()=>sim.classList.add('step2'),800);setTimeout(()=>sim.classList.add('step3'),1700)};
+document.getElementById('reset').onclick=()=>sim.className='atomBox sim';
+document.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{sim.className='atomBox sim step'+b.dataset.step;if(b.dataset.step==='1')sim.classList.add('running')});
+
+function bind(id,out,suffix){const x=document.getElementById(id),o=document.getElementById(out);x.oninput=()=>o.textContent=x.value+' '+suffix}
+bind('rv','rvv','V');bind('pe','pev','eV');bind('pb','pbv','eV');bind('stime','stimev','s');bind('ienergy','ienergyv','eV');
+
+function canvas(id){return document.getElementById(id).getContext('2d')}
+function base(c,w,h){c.clearRect(0,0,w,h);c.fillStyle='#030711';c.fillRect(0,0,w,h);c.strokeStyle='#122137';c.lineWidth=1;for(let x=40;x<w;x+=60){c.beginPath();c.moveTo(x,20);c.lineTo(x,h-35);c.stroke()}for(let y=30;y<h-30;y+=45){c.beginPath();c.moveTo(35,y);c.lineTo(w-15,y);c.stroke()}}
+function cmaDraw(run=false){
+ const cv=document.getElementById('cmaCanvas'),c=cv.getContext('2d'),w=cv.width=cv.clientWidth,h=cv.height=350;base(c,w,h);
+ c.fillStyle='#15dfe9';c.font='12px monospace';c.fillText('SOURCE',35,50);c.fillText('SAMPLE',35,300);c.fillText('CMA MIRROR',w/2-55,60);c.fillText('DETECTOR',w-90,160);
+ c.strokeStyle='#3a5874';c.lineWidth=4;c.beginPath();c.arc(w/2,175,95,-1.1,1.1);c.stroke();c.beginPath();c.arc(w/2,175,125,-1.1,1.1);c.stroke();
+ c.strokeStyle='#ffb21c';c.lineWidth=2;c.beginPath();c.moveTo(75,280);c.quadraticCurveTo(w/2,40,w-70,160);c.stroke();
+ c.strokeStyle='#19d9f2';c.beginPath();c.moveTo(75,270);c.quadraticCurveTo(w/2,95,w-70,160);c.stroke();
+ if(run){c.strokeStyle='#ff4e72';c.beginPath();c.moveTo(75,260);c.quadraticCurveTo(w/2,155,w-70,165);c.stroke()}
+}
+document.getElementById('cmaRun').onclick=()=>cmaDraw(true);document.getElementById('cmaReset').onclick=()=>cmaDraw(false);
+
+const peaks=[['C','C KLL',272],['O','O KLL',510],['S','S KLL',1586],['Cu','Cu LMM',921],['Ag','Ag MNN',356]];
+let noiseLevel=1;
+function spectrum(){
+ const cv=document.getElementById('specCanvas'),c=cv.getContext('2d'),w=cv.width=cv.clientWidth,h=cv.height=350;base(c,w,h);
+ const maxE=1800; c.strokeStyle='#536b82';c.beginPath();c.moveTo(45,20);c.lineTo(45,h-40);c.lineTo(w-20,h-40);c.stroke();
+ c.fillStyle='#7f95aa';c.font='10px monospace';c.fillText('Intensity',8,22);c.fillText('Electron kinetic energy (eV)',w-190,h-15);
+ peaks.forEach(([el,name,e])=>{let x=45+(e/maxE)*(w-70);let bh=70+(e%90);c.strokeStyle='#18dbea';c.lineWidth=2;c.beginPath();c.moveTo(x,h-40);c.lineTo(x,h-40-bh);c.stroke();c.fillStyle='#bceff5';c.fillText(el,x-8,h-45-bh);});
+ c.strokeStyle='#1b8e9f';c.lineWidth=1;c.beginPath();for(let x=45;x<w-20;x++){let e=(x-45)/(w-70)*maxE;let y=h-55-Math.random()*noiseLevel*7;peaks.forEach(p=>{let d=(e-p[2])/18;y-=80*Math.exp(-d*d)});if(x===45)c.moveTo(x,y);else c.lineTo(x,y)}c.stroke();
+}
+const elements=document.getElementById('elements');peaks.forEach(p=>{let b=document.createElement('div');b.className='preset';b.innerHTML=`<b>${p[0]}</b><span>${p[1]} · ${p[2]} eV</span>`;b.onclick=()=>document.getElementById('peakInfo').innerHTML=`<div class="row"><span>Element</span><span>${p[0]}</span></div><div class="row"><span>Transition</span><span>${p[1]}</span></div><div class="row"><span>Peak energy</span><span>${p[2]} eV</span></div>`;elements.appendChild(b)});
+document.getElementById('regen').onclick=spectrum;document.getElementById('noise').onclick=()=>{noiseLevel=noiseLevel===1?3:noiseLevel===3?6:1;document.getElementById('noise').textContent='Noise: '+(noiseLevel===1?'Low':noiseLevel===3?'Medium':'High');spectrum()};
+
+function depthDraw(){const cv=document.getElementById('depthCanvas'),c=cv.getContext('2d'),w=cv.width=cv.clientWidth,h=cv.height=350;base(c,w,h);c.strokeStyle='#19d9f2';c.lineWidth=2;c.beginPath();for(let x=40;x<w-20;x++){let d=(x-40)/(w-60)*50;let y=h-45-(d<6?150*Math.exp(-d/2):d<22?100*Math.exp(-(d-6)/10):25);if(x===40)c.moveTo(x,y);else c.lineTo(x,y)}c.stroke();c.fillStyle='#7f95aa';c.font='10px monospace';c.fillText('Concentration',5,20);c.fillText('Depth (nm)',w-75,h-15)}
+function curveDraw(){
+ const cv=document.getElementById('curveCanvas'),c=cv.getContext('2d'),w=cv.width=cv.clientWidth,h=cv.height=350;base(c,w,h);c.strokeStyle='#21dce8';c.lineWidth=3;c.beginPath();for(let x=0;x<w-60;x++){let e=20+2980*x/(w-60);let imfp=.35+.0009*e+1.2*Math.exp(-e/180);let y=h-45-Math.min(240,imfp*70);if(x===0)c.moveTo(40+x,y);else c.lineTo(40+x,y)}c.stroke();c.fillStyle='#8298ae';c.font='10px monospace';c.fillText('IMFP (nm)',5,20);c.fillText('Electron kinetic energy (eV)',w-170,h-15)}
+document.getElementById('energy').oninput=e=>{let v=+e.target.value;document.getElementById('energyv').textContent=v+' eV';let im=.35+.0009*v+1.2*Math.exp(-v/180);document.getElementById('imfp').textContent=im.toFixed(2)+' nm';curveDraw()};
+
+function drawAll(){cmaDraw(false);spectrum();depthDraw();curveDraw()}window.addEventListener('resize',drawAll);drawAll();
+</script>
+</body>
+</html>

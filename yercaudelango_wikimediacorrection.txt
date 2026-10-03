@@ -1,0 +1,21 @@
+<!-- STATISTICS -->
+{| align="center" style="width: 250px; position: relative;" style="margin-top: 5px; font-family: Calibri; font-size: 25px; text-align: center; letter-spacing: 2px; text-shadow: 0 1px 1px #ccc; text-transform: uppercase;"
+| Statistics
+|}
+{| align="center" style="width: 250px; margin-bottom: 5px;"
+| style="background: #fafafa; border: 1px solid #ccc; {{border-radius|6px}} height: 90px; width: 250px; -moz-box-shadow: 1px 1px 5px #ccc; -webkit-box-shadow: 1px 1px 5px #ccc; box-shadow: 1px 1px 5px #ccc;" |
+{| style="vertical-align: middle; background: #fafafa; width: 100%;"
+|- style="background: #fafafa; font-family: Mono; font-size: 74px; font-weight: bold; text-align: center; text-shadow: 0 2px 2px #ccc; letter-spacing: 8px;"
+|{{formatnum:{{PAGESINCATEGORY:Files by User:Yercaud-elango|all}}|R}}
+|}
+|-
+| style="color: #2f4f4f; font-family: Calibri; font-size: 18px; text-align: center; letter-spacing: 2px; text-shadow: 0 1px 1px #ccc; text-transform: uppercase;" | entries so far
+|}<!-- STATISTICS -->
+
+{{CatAZ}}
+
+This category contains files made by [[User:Yercaud-elango|Yercaud-elango]].
+{{User category|Yercaud-elango}}
+
+[[Category:Wikimedians in Tamil Nadu|Yercaud-elango]]
+
