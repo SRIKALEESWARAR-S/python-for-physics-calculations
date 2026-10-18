@@ -1,0 +1,191 @@
+===========================================================================
+LEGENDRE + RNN + TRANSFORMER CRICKET RESEARCH
+===========================================================================
+
+Device: cuda
+
+Configuration
+-------------------------
+Window: 16
+Legendre order: 5
+Hidden: 64
+Layers: 2
+Heads: 4
+Epochs: 15
+Batch size: 64
+
+Raw dataset shape: (25390, 16)
+
+Columns:
+['match_id', 'date', 'innings', 'batting_team', 'batter', 'bowler', 'over', 'ball_in_over', 'legal_balls_elapsed', 'total_runs', 'batter_runs', 'extras_runs', 'is_wicket', 'wicket_kind', 'innings_cumulative_runs', 'innings_cumulative_wickets']
+
+Target distribution:
+target
+0    13608
+1     7473
+2     1386
+3      177
+4     1749
+5      301
+6      696
+Name: count, dtype: int64
+
+Features:
+   total_runs
+   batter_runs
+   extras_runs
+   is_wicket
+   over_index0
+   ball_index_in_over
+   cumulative_runs
+   cumulative_wickets
+   legal_balls_elapsed
+
+Chronological split
+-------------------------
+Total matches: 49
+Train matches: 34
+Validation matches: 7
+Test matches: 8
+
+Train:
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+
+Validation:
+[35, 36, 37, 38, 39, 40, 41]
+
+Test:
+[42, 43, 44, 45, 46, 47, 48, 49]
+
+Windowed datasets
+-------------------------
+Train: (16524, 16, 9) (16524,)
+Validation: (3339, 16, 9) (3339,)
+Test: (3975, 16, 9) (3975,)
+
+Calculating Legendre representation...
+Legendre train shape: (16524, 6, 9)
+Legendre validation shape: (3339, 6, 9)
+Legendre test shape: (3975, 6, 9)
+
+
+===========================================================================
+TRAINING GRU
+===========================================================================
+Epoch 01/15 | train=1.2639 | val=1.2413
+Epoch 02/15 | train=1.2003 | val=1.2338
+Epoch 03/15 | train=1.1969 | val=1.2434
+Epoch 04/15 | train=1.1946 | val=1.2348
+Epoch 05/15 | train=1.1924 | val=1.2430
+Epoch 06/15 | train=1.1922 | val=1.2411
+Epoch 07/15 | train=1.1907 | val=1.2367
+Epoch 08/15 | train=1.1879 | val=1.2390
+Epoch 09/15 | train=1.1893 | val=1.2357
+Epoch 10/15 | train=1.1877 | val=1.2444
+Epoch 11/15 | train=1.1857 | val=1.2412
+Epoch 12/15 | train=1.1834 | val=1.2363
+Epoch 13/15 | train=1.1839 | val=1.2426
+Epoch 14/15 | train=1.1817 | val=1.2377
+Epoch 15/15 | train=1.1785 | val=1.2368
+
+
+===========================================================================
+TRAINING LSTM
+===========================================================================
+Epoch 01/15 | train=1.2583 | val=1.2394
+Epoch 02/15 | train=1.2028 | val=1.2373
+Epoch 03/15 | train=1.1998 | val=1.2364
+Epoch 04/15 | train=1.1975 | val=1.2419
+Epoch 05/15 | train=1.1964 | val=1.2340
+Epoch 06/15 | train=1.1950 | val=1.2345
+Epoch 07/15 | train=1.1934 | val=1.2382
+Epoch 08/15 | train=1.1910 | val=1.2327
+Epoch 09/15 | train=1.1907 | val=1.2361
+Epoch 10/15 | train=1.1899 | val=1.2383
+Epoch 11/15 | train=1.1876 | val=1.2361
+Epoch 12/15 | train=1.1861 | val=1.2405
+Epoch 13/15 | train=1.1843 | val=1.2375
+Epoch 14/15 | train=1.1823 | val=1.2382
+Epoch 15/15 | train=1.1803 | val=1.2354
+
+
+===========================================================================
+TRAINING RAW TRANSFORMER
+===========================================================================
+Epoch 01/15 | train=1.2303 | val=1.2570
+Epoch 02/15 | train=1.2029 | val=1.2384
+Epoch 03/15 | train=1.1986 | val=1.2472
+Epoch 04/15 | train=1.1985 | val=1.2466
+Epoch 05/15 | train=1.1955 | val=1.2469
+Epoch 06/15 | train=1.1942 | val=1.2453
+Epoch 07/15 | train=1.1938 | val=1.2416
+Epoch 08/15 | train=1.1945 | val=1.2417
+Epoch 09/15 | train=1.1911 | val=1.2499
+Epoch 10/15 | train=1.1912 | val=1.2507
+Epoch 11/15 | train=1.1904 | val=1.2398
+Epoch 12/15 | train=1.1871 | val=1.2399
+Epoch 13/15 | train=1.1876 | val=1.2467
+Epoch 14/15 | train=1.1856 | val=1.2516
+Epoch 15/15 | train=1.1863 | val=1.2446
+
+
+===========================================================================
+TRAINING LEGENDRE TRANSFORMER
+===========================================================================
+Epoch 01/15 | train=1.2308 | val=1.2424
+Epoch 02/15 | train=1.2043 | val=1.2417
+Epoch 03/15 | train=1.2032 | val=1.2356
+Epoch 04/15 | train=1.1997 | val=1.2349
+Epoch 05/15 | train=1.1969 | val=1.2391
+Epoch 06/15 | train=1.1981 | val=1.2427
+Epoch 07/15 | train=1.1946 | val=1.2397
+Epoch 08/15 | train=1.1936 | val=1.2396
+Epoch 09/15 | train=1.1936 | val=1.2365
+Epoch 10/15 | train=1.1911 | val=1.2375
+Epoch 11/15 | train=1.1908 | val=1.2396
+Epoch 12/15 | train=1.1924 | val=1.2374
+Epoch 13/15 | train=1.1895 | val=1.2514
+Epoch 14/15 | train=1.1902 | val=1.2415
+Epoch 15/15 | train=1.1884 | val=1.2330
+
+
+===========================================================================
+FINAL TEST BENCHMARK
+===========================================================================
+
+  	model 	accuracy 	balanced_accuracy 	macro_f1 	weighted_f1 	log_loss 	latency_ms_per_sample
+0 	LSTM 	0.5723 	0.1658 	0.1503 	0.4940 	1.1481 	0.0176
+1 	LegendreTransformer 	0.5706 	0.1635 	0.1471 	0.4876 	1.1514 	0.0225
+2 	GRU 	0.5786 	0.1630 	0.1445 	0.4848 	1.1482 	0.0165
+3 	Transformer 	0.5753 	0.1612 	0.1418 	0.4791 	1.1489 	0.0225
+4 	Majority 	0.5535 	0.1429 	0.1018 	0.3944 	16.0950 	0.0000
+
+
+
+===========================================================================
+RESEARCH RUN COMPLETE
+===========================================================================
+
+Dataset: 25390 deliveries
+Matches: 49
+Training windows: 16524
+Validation windows: 3339
+Test windows: 3975
+
+Results saved to:
+/content/legendreq_2003_ml_results
+
+Best model by macro-F1:
+LSTM | Macro-F1 = 0.1503
+
+Benchmark file:
+/content/legendreq_2003_ml_results/model_benchmark.csv
+
+Prediction file:
+/content/legendreq_2003_ml_results/test_predictions.csv
+
+===========================================================================
+NEXT RESEARCH STAGE:
+Legendre Transformer + numerical RAG retrieval
+===========================================================================
+
