@@ -1,0 +1,4 @@
+---
+layout: default
+---
+<article class="page-shell article-shell"><a class="back-link" href="{{ page.back_url | default: '/research/' | relative_url }}">← Back</a><p class="eyebrow">{{ page.category | default: page.collection | capitalize }}{% if page.status %} · {{ page.status }}{% endif %}</p><h1>{{ page.title }}</h1>{% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}<div class="article-content">{{ content }}</div>{% if page.links %}<div class="link-row">{% for link in page.links %}<a class="button button-secondary" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }} ↗</a>{% endfor %}</div>{% endif %}</article>

@@ -1,0 +1,46 @@
+title: "Sri Kaleeswarar S"
+name: "Sri Kaleeswarar S"
+tagline: "Physics · Scientific Computing · Open Science · Tamil Science Communication"
+description: "Academic portfolio of Sri Kaleeswarar S, focused on physics, scientific computing, open-source tools, and science communication."
+url: "https://YOUR-GITHUB-USERNAME.github.io"
+baseurl: "/YOUR-REPOSITORY-NAME"
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: /journal/:year/:month/:day/:title/
+plugins: []
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+  writings:
+    output: true
+    permalink: /writings/:name/
+  talks:
+    output: true
+    permalink: /talks/:name/
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: item
+  - scope:
+      path: ""
+      type: "writings"
+    values:
+      layout: item
+  - scope:
+      path: ""
+      type: "talks"
+    values:
+      layout: item
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
